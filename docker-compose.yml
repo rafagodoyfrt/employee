@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: employee_postgres
+    environment:
+      POSTGRES_DB: employee_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - employee-network
+  employee:
+    image: employeee:1.0.0
+    container_name: employee_app
+    environment:
+      POSTGRES_HOST: jdbc:postgresql://postgres:5432/employee_db
+    ports:
+      - "8080:8080"
+    networks:
+      - employee-network
+
+volumes:
+  postgres-data:
+
+networks:
+  employee-network:
+    driver: bridge
