@@ -16,7 +16,6 @@ import java.util.UUID;
 public class EmployeeJpaEntity {
 
     @Id
-
     private UUID id;
 
     @Column(nullable = false)

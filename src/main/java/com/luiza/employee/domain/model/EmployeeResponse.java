@@ -1,17 +1,19 @@
 package com.luiza.employee.domain.model;
 
+import com.luiza.employee.adapter.out.persistence.EmployeeJpaEntity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.util.UUID;
+
 @AllArgsConstructor
-public class Employee {
-    @NotBlank(message = "Name must not be blank")
+public class EmployeeResponse {
+    private UUID id;
     private String name;
-    @Email(message = "Email should be valid")
     private String email;
-    @NotBlank(message = "Department must not be blank")
     private String department;
 }

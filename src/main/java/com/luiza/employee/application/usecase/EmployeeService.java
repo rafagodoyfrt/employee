@@ -1,7 +1,7 @@
 package com.luiza.employee.application.usecase;
 
-import com.luiza.employee.adapter.out.persistence.EmployeeJpaEntity;
 import com.luiza.employee.domain.model.Employee;
+import com.luiza.employee.domain.model.EmployeeResponse;
 import com.luiza.employee.domain.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class EmployeeService {
         this.repository = repository;
     }
 
-    public EmployeeJpaEntity create(Employee employee) {
+    public EmployeeResponse create(Employee employee) {
         return repository.save(employee);
     }
 
