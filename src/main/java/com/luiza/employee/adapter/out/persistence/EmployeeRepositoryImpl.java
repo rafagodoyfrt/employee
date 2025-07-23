@@ -25,8 +25,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
                 employee.getEmail(),
                 employee.getDepartment()
         );
-        EmployeeJpaEntity teste = jpaRepository.save(entity);
-        return teste;
+        return jpaRepository.save(entity);
     }
 
     @Override
