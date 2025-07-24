@@ -1,6 +1,7 @@
 package com.luiza.employee.adapter.out.persistence;
 
 import com.luiza.employee.domain.model.Employee;
+import com.luiza.employee.domain.model.EmployeeResponse;
 import com.luiza.employee.domain.repository.EmployeeRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,20 +19,28 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public EmployeeJpaEntity save(Employee employee) {
+    public EmployeeResponse save(Employee employee) {
         EmployeeJpaEntity entity = new EmployeeJpaEntity(
                 UUID.randomUUID(),
                 employee.getName(),
                 employee.getEmail(),
                 employee.getDepartment()
         );
-        return jpaRepository.save(entity);
+        EmployeeJpaEntity employeeJpaEntity = jpaRepository.save(entity);
+
+        return new EmployeeResponse(
+                employeeJpaEntity.getId(),
+                employeeJpaEntity.getName(),
+                employeeJpaEntity.getEmail(),
+                employeeJpaEntity.getDepartment()
+        );
     }
 
     @Override
-    public List<Employee> findAll() {
+    public List<EmployeeResponse> findAll() {
         return jpaRepository.findAll().stream()
-                .map(entity -> new Employee(
+                .map(entity -> new EmployeeResponse(
+                        entity.getId(),
                         entity.getName(),
                         entity.getEmail(),
                         entity.getDepartment()

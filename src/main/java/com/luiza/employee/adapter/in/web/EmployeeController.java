@@ -1,8 +1,8 @@
 package com.luiza.employee.adapter.in.web;
 
-import com.luiza.employee.adapter.out.persistence.EmployeeJpaEntity;
 import com.luiza.employee.application.usecase.EmployeeService;
 import com.luiza.employee.domain.model.Employee;
+import com.luiza.employee.domain.model.EmployeeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,13 +20,13 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<List<Employee>> listAll() {
+    public ResponseEntity<List<EmployeeResponse>> listAll() {
         return ResponseEntity.ok(employeeService.getAll());
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeJpaEntity> create(@RequestBody @Valid Employee employee) {
-        EmployeeJpaEntity saved = employeeService.create(employee);
+    public ResponseEntity<EmployeeResponse> create(@RequestBody @Valid Employee employee) {
+        EmployeeResponse saved = employeeService.create(employee);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 

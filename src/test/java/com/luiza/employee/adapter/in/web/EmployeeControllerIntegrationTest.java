@@ -1,22 +1,23 @@
 package com.luiza.employee.adapter.in.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luiza.employee.application.usecase.EmployeeService;
 import com.luiza.employee.domain.model.Employee;
+import com.luiza.employee.domain.model.EmployeeResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import com.luiza.employee.adapter.out.persistence.EmployeeJpaEntity;
-import com.luiza.employee.application.usecase.EmployeeService;
 
 import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(EmployeeController.class)
 class EmployeeControllerIntegrationTest {
@@ -32,7 +33,7 @@ class EmployeeControllerIntegrationTest {
 
     @Test
     void listAll_ShouldReturn200WithEmployees() throws Exception {
-        List<Employee> employees = List.of(new Employee("Alice","alice@gmailcom", "Finance"));
+        List<EmployeeResponse> employees = List.of(new EmployeeResponse(UUID.randomUUID(),"Alice","alice@gmailcom", "Finance"));
         when(employeeService.getAll()).thenReturn(employees);
 
         mockMvc.perform(get("/employees"))
@@ -43,7 +44,7 @@ class EmployeeControllerIntegrationTest {
     @Test
     void create_ShouldReturn201() throws Exception {
         Employee employee = new Employee("Bob","bob@gmail.com", "IT");
-        EmployeeJpaEntity entity = new EmployeeJpaEntity(UUID.randomUUID(), employee.getName(), employee.getEmail(), employee.getDepartment());
+        EmployeeResponse entity = new EmployeeResponse(UUID.randomUUID(), employee.getName(), employee.getEmail(), employee.getDepartment());
 
         when(employeeService.create(any())).thenReturn(entity);
 

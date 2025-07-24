@@ -15,7 +15,9 @@ services:
     networks:
       - employee-network
   employee:
-    image: employeee:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: employee_app
     environment:
       POSTGRES_HOST: jdbc:postgresql://postgres:5432/employee_db

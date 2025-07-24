@@ -1,6 +1,7 @@
 package com.luiza.employee.adapter.out.persistence;
 
 import com.luiza.employee.domain.model.Employee;
+import com.luiza.employee.domain.model.EmployeeResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -27,11 +28,13 @@ class EmployeeRepositoryImplTest {
     void save_ShouldSaveEmployeeAndReturnEntity() {
         Employee employee = new Employee("Alice", "alice@example.com", "HR");
         EmployeeJpaEntity savedEntity = new EmployeeJpaEntity(UUID.randomUUID(), "Alice", "alice@example.com", "HR");
+        EmployeeResponse employeeResponse = new EmployeeResponse(UUID.randomUUID(), "Alice", "alice@example.com", "HR");
 
         when(jpaRepository.save(any(EmployeeJpaEntity.class))).thenReturn(savedEntity);
 
-        EmployeeJpaEntity result = employeeRepository.save(employee);
+        EmployeeResponse result = employeeRepository.save(employee);
 
+        // preciso criar um novo objeto do tipo EmployeeResponse usando o objeto savedEntity e ai sim realizar o assertEquals?
         assertEquals(savedEntity, result);
 
         // Captura e verifica o objeto passado para o save
@@ -52,7 +55,7 @@ class EmployeeRepositoryImplTest {
 
         when(jpaRepository.findAll()).thenReturn(entities);
 
-        List<Employee> result = employeeRepository.findAll();
+        List<EmployeeResponse> result = employeeRepository.findAll();
 
         assertEquals(2, result.size());
         assertEquals("Bob", result.get(0).getName());

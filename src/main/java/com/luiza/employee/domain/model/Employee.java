@@ -12,6 +12,6 @@ public class Employee {
     private String name;
     @Email(message = "Email should be valid")
     private String email;
-    @NotBlank(message = "Departament must not be blank")
+    @NotBlank(message = "Department must not be blank")
     private String department;
 }
