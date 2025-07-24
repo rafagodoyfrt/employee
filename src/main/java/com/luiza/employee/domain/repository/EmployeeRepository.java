@@ -16,5 +16,4 @@ public interface EmployeeRepository {
 
     void deleteById(UUID id);
 
-    Optional<Employee> findById(UUID id);
 }

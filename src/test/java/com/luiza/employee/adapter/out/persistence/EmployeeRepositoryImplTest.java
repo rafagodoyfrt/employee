@@ -28,14 +28,10 @@ class EmployeeRepositoryImplTest {
     void save_ShouldSaveEmployeeAndReturnEntity() {
         Employee employee = new Employee("Alice", "alice@example.com", "HR");
         EmployeeJpaEntity savedEntity = new EmployeeJpaEntity(UUID.randomUUID(), "Alice", "alice@example.com", "HR");
-        EmployeeResponse employeeResponse = new EmployeeResponse(UUID.randomUUID(), "Alice", "alice@example.com", "HR");
 
         when(jpaRepository.save(any(EmployeeJpaEntity.class))).thenReturn(savedEntity);
 
         EmployeeResponse result = employeeRepository.save(employee);
-
-        // preciso criar um novo objeto do tipo EmployeeResponse usando o objeto savedEntity e ai sim realizar o assertEquals?
-        assertEquals(savedEntity, result);
 
         // Captura e verifica o objeto passado para o save
         ArgumentCaptor<EmployeeJpaEntity> captor = ArgumentCaptor.forClass(EmployeeJpaEntity.class);
@@ -44,6 +40,11 @@ class EmployeeRepositoryImplTest {
         assertEquals("Alice", captured.getName());
         assertEquals("alice@example.com", captured.getEmail());
         assertEquals("HR", captured.getDepartment());
+
+        // Verifica o objeto passado como parametro no create com a saida do metodo
+        assertEquals(result.getName(), employee.getName());
+        assertEquals(result.getEmail(), employee.getEmail());
+        assertEquals(result.getDepartment(), employee.getDepartment());
     }
 
     @Test
@@ -60,30 +61,6 @@ class EmployeeRepositoryImplTest {
         assertEquals(2, result.size());
         assertEquals("Bob", result.get(0).getName());
         assertEquals("carol@example.com", result.get(1).getEmail());
-    }
-
-    @Test
-    void findById_ShouldReturnEmployeeIfExists() {
-        UUID id = UUID.randomUUID();
-        EmployeeJpaEntity entity = new EmployeeJpaEntity(id, "Dave", "dave@example.com", "Marketing");
-
-        when(jpaRepository.findById(id)).thenReturn(Optional.of(entity));
-
-        Optional<Employee> result = employeeRepository.findById(id);
-
-        assertTrue(result.isPresent());
-        assertEquals("Dave", result.get().getName());
-    }
-
-    @Test
-    void findById_ShouldReturnEmptyIfNotFound() {
-        UUID id = UUID.randomUUID();
-
-        when(jpaRepository.findById(id)).thenReturn(Optional.empty());
-
-        Optional<Employee> result = employeeRepository.findById(id);
-
-        assertFalse(result.isPresent());
     }
 
     @Test

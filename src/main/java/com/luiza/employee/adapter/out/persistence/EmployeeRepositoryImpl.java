@@ -53,13 +53,4 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         jpaRepository.deleteById(id);
     }
 
-    @Override
-    public Optional<Employee> findById(UUID id) {
-        return jpaRepository.findById(id)
-                .map(entity -> new Employee(
-                        entity.getName(),
-                        entity.getEmail(),
-                        entity.getDepartment()
-                ));
-    }
 }
