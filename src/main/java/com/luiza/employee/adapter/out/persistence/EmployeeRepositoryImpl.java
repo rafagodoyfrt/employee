@@ -19,7 +19,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public EmployeeResponse save(Employee employee) {
+    public EmployeeResponse save (Employee employee){
         EmployeeJpaEntity entity = new EmployeeJpaEntity(
                 UUID.randomUUID(),
                 employee.getName(),
@@ -52,5 +52,4 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public void deleteById(UUID id) {
         jpaRepository.deleteById(id);
     }
-
 }

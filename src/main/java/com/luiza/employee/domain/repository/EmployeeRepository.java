@@ -10,10 +10,9 @@ import java.util.UUID;
 
 public interface EmployeeRepository {
 
-    EmployeeResponse save(Employee employee);
+    EmployeeResponse save (Employee employee);
 
     List<EmployeeResponse> findAll();
 
     void deleteById(UUID id);
-
 }

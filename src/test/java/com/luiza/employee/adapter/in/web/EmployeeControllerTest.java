@@ -14,8 +14,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class EmployeeControllerTest {
-
+public class EmployeeControllerTest {
     private EmployeeService employeeService;
     private EmployeeController employeeController;
 

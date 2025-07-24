@@ -17,15 +17,15 @@ public class EmployeeService {
         this.repository = repository;
     }
 
-    public EmployeeResponse create(Employee employee) {
+    public EmployeeResponse create(Employee employee){
         return repository.save(employee);
     }
 
-    public List<EmployeeResponse> getAll() {
+    public List<EmployeeResponse> getAll(){
         return repository.findAll();
     }
 
-    public void delete(UUID id) {
+    public void delete(UUID id){
         repository.deleteById(id);
     }
 }
