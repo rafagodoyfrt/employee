@@ -12,7 +12,7 @@ public interface EmployeeRepository {
 
     EmployeeResponse save(Employee employee);
 
-    List<Employee> findAll();
+    List<EmployeeResponse> findAll();
 
     void deleteById(UUID id);
 

@@ -38,9 +38,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public List<Employee> findAll() {
+    public List<EmployeeResponse> findAll() {
         return jpaRepository.findAll().stream()
-                .map(entity -> new Employee(
+                .map(entity -> new EmployeeResponse(
+                        entity.getId(),
                         entity.getName(),
                         entity.getEmail(),
                         entity.getDepartment()

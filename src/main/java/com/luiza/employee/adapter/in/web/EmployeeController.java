@@ -1,6 +1,5 @@
 package com.luiza.employee.adapter.in.web;
 
-import com.luiza.employee.adapter.out.persistence.EmployeeJpaEntity;
 import com.luiza.employee.application.usecase.EmployeeService;
 import com.luiza.employee.domain.model.Employee;
 import com.luiza.employee.domain.model.EmployeeResponse;
@@ -21,7 +20,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<List<Employee>> listAll() {
+    public ResponseEntity<List<EmployeeResponse>> listAll() {
         return ResponseEntity.ok(employeeService.getAll());
     }
 

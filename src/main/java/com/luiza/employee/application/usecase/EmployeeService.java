@@ -21,7 +21,7 @@ public class EmployeeService {
         return repository.save(employee);
     }
 
-    public List<Employee> getAll() {
+    public List<EmployeeResponse> getAll() {
         return repository.findAll();
     }
 
