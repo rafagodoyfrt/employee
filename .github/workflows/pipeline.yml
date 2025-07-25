@@ -1,4 +1,4 @@
-name: CI - Java Spring Boot
+name: CI/CD - Projects Employees
 
 on:
   push:
