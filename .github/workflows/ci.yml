@@ -37,7 +37,4 @@ jobs:
         with:
           name: jacoco-report
           path: target/custom-jacoco-report
-
-Jobs:
-  build:
-    name: Finish to process
+      - name: Deploy da aplicacao (Sem processo real, apenas ilustrativo)
