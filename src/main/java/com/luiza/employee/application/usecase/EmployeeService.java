@@ -29,4 +29,8 @@ public class EmployeeService {
     public void delete(UUID id){
         repository.deleteById(id);
     }
+
+    public EmployeeResponse update(UUID id, Employee employee) {
+        return repository.updateById(id, employee);
+    }
 }

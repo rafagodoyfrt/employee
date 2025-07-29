@@ -35,4 +35,10 @@ public class EmployeeController {
         employeeService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<EmployeeResponse> update(@PathVariable UUID id, Employee employee){
+        EmployeeResponse employeeResponse = employeeService.update(id, employee);
+        return new ResponseEntity<>(employeeResponse, HttpStatus.NO_CONTENT);
+    }
 }

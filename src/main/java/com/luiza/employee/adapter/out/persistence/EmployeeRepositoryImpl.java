@@ -6,7 +6,6 @@ import com.luiza.employee.domain.repository.EmployeeRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -51,5 +50,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public void deleteById(UUID id) {
         jpaRepository.deleteById(id);
+    }
+
+    @Override
+    public EmployeeResponse updateById(UUID id, Employee employee){
+
+        EmployeeJpaEntity employeeJpaEntity = new EmployeeJpaEntity(id, employee.getName(), employee.getEmail(), employee.getDepartment());
+        EmployeeJpaEntity resulteToSave = jpaRepository.save(employeeJpaEntity);
+        return new EmployeeResponse(resulteToSave.getId(), resulteToSave.getName(), resulteToSave.getEmail(), resulteToSave.getDepartment());
     }
 }
